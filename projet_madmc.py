@@ -36,6 +36,19 @@ def non_domine(list_vec):
             min2 = vec[1]
     return res
 
+def pareto_dyn(tab_couts, k):
+    n = len(tab_couts)
+    T = np.empty((n, k + 1), dtype = object)
+    T.fill([])
+    T[:, 0].fill([])
+    T[0, 0].append((0, 0))
+    T[0, 1] = [tab_couts[0]]
+    for i in range(1, n):
+        for j in range(1, min(k + 1, i + 2)):
+            F = [(y1 + tab_couts[i][0], y2 + tab_couts[i][1]) for (y1, y2) in T[i - 1, j - 1]]
+            T[i, j] = non_domine(F + T[i - 1, j])
+    return T[-1, -1]
+
 def tester_temps(fonction):
     res = {}
     for n in tqdm(range(200, 10001, 200)):
