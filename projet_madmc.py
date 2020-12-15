@@ -49,6 +49,25 @@ def pareto_dyn(tab_couts, k):
             T[i, j] = non_domine(F + T[i - 1, j])
     return T[-1, -1]
 
+def f_i(y, I):
+    fmin = I[0] * y[0] + (1 - I[0]) * y[1]
+    fmax = I[1] * y[0] + (1 - I[1]) * y[1]
+    return max (fmin, fmax)
+
+def vec_minimax(list_vec, I):
+    res = float("inf")
+    vec_res = None
+    for y in list_vec:
+        fi = f_i(y, I)
+        if fi < res:
+            res = fi
+            vec_res = y
+    return vec_res
+
+def pareto_solver(list_vec, k, I):
+    list_par = pareto_dyn(list_vec, k)
+    return vec_minimax(list_par, I)
+
 def tester_temps(fonction):
     res = {}
     for n in tqdm(range(200, 10001, 200)):
