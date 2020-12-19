@@ -1,0 +1,11 @@
+Documentation du projet MADMC
+=============================
+
+.. automodule:: projet_madmc
+    :members:
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+   
+

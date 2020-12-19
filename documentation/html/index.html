@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentation du projet MADMC &#8212; Documentation Projet MADMC </title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-projet_madmc">
+<span id="documentation-du-projet-madmc"></span><h1>Documentation du projet MADMC<a class="headerlink" href="#module-projet_madmc" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Created on Sun Dec 13 23:44:18 2020</p>
+<p>Projet MADMC
+Sélection bi-objectifs avec coefficients intervalles</p>
+<p>&#64;author: Ariana Carnielli</p>
+<dl class="py function">
+<dt id="projet_madmc.f_i">
+<code class="sig-prename descclassname">projet_madmc.</code><code class="sig-name descname">f_i</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">I</span></em><span class="sig-paren">)</span><a class="headerlink" href="#projet_madmc.f_i" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Calcule la valeur de la fonction f_I sur le vecteur y avec l’intervalle I.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<em>tuple</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – Le vecteur qu’on veut appliquer la fonction f_I.</p></li>
+<li><p><strong>I</strong> (<em>tuple</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – L’intervalle [alpha_min, alpha_max] utilisé dans le calcul.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p><strong>_</strong> – La valeur de la fonction f_i(y) dans l’intervalle I.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="projet_madmc.gen_vecteur">
+<code class="sig-prename descclassname">projet_madmc.</code><code class="sig-name descname">gen_vecteur</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">m</span></em><span class="sig-paren">)</span><a class="headerlink" href="#projet_madmc.gen_vecteur" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Crée une liste de n vecteurs.
+Chaque vecteur est représenté comme un tuple de Python à 2 éléments où
+chaque élément a des valeurs tirées aléatoirement avec la loi normale
+d’espérance m et d’écart-type m/4.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – La quantité de vecteurs créés.</p></li>
+<li><p><strong>m</strong> (<em>int</em>) – L’espérance de la loi normale utilisée.</p></li>
+<li><p><strong>_</strong> (<em>list</em><em>(</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em><em>)</em>) – Liste de taille n avec des tuples de floats de taille 2 représentant
+les vecteurs.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="projet_madmc.i_solver">
+<code class="sig-prename descclassname">projet_madmc.</code><code class="sig-name descname">i_solver</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_vec</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">I</span></em><span class="sig-paren">)</span><a class="headerlink" href="#projet_madmc.i_solver" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Implémente la procédure en deux temps pour déterminer l’image d’une
+solution minimax dans l’espace des objectifs.
+Fait comme décrit dans la partie 4 du projet en utilisant la I-dominance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>list_vec</strong> (<em>list</em><em>(</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em><em>)</em>) – Liste avec des tuples de floats de taille 2 représentant des coûts des
+objets.</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – Quantité d’objets à prend dans la solution.</p></li>
+<li><p><strong>I</strong> (<em>tuple</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – L’intervalle [alpha_min, alpha_max] utilisé dans le calcul.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p><strong>_</strong> – Vecteur avec l’image d’une solution minimax dans l’espace des
+objectifs.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>tuple(float, float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="projet_madmc.non_domine_i">
+<code class="sig-prename descclassname">projet_madmc.</code><code class="sig-name descname">non_domine_i</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_vec</span></em>, <em class="sig-param"><span class="n">I</span></em><span class="sig-paren">)</span><a class="headerlink" href="#projet_madmc.non_domine_i" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Détermine les vecteurs non I-dominés dans une liste de vecteurs.
+Réalise d’abord une transformation des vecteurs par la fonction pi, puis
+calcule les vecteurs Pareto non-dominés parmi ceux-ci et enfin transforme
+ces vecteurs à l’aide de la fonction pi-1 pour identifier les vecteurs non
+I-dominés.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>list_vec</strong> (<em>list</em><em>(</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em><em>)</em>) – Liste avec des tuples de floats de taille 2 représentant des vecteurs.</p></li>
+<li><p><strong>I</strong> (<em>tuple</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – L’intervalle [alpha_min, alpha_max] utilisé dans le calcul.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p><strong>_</strong> – liste des vecteurs non I-dominés.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>list((float, float))</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="projet_madmc.non_domine_p">
+<code class="sig-prename descclassname">projet_madmc.</code><code class="sig-name descname">non_domine_p</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_vec</span></em><span class="sig-paren">)</span><a class="headerlink" href="#projet_madmc.non_domine_p" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Détermine les vecteurs Pareto non-dominés dans une liste de vecteurs.
+Réalise d’abord un tri lexicographique des vecteurs, puis un seul parcours
+de la liste obtenue pour identifier les vecteurs non-dominés.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><p><strong>list_vec</strong> (<em>list</em><em>(</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em><em>)</em>) – Liste avec des tuples de floats de taille 2 représentant des vecteurs.</p>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p><strong>res</strong> – liste des vecteurs non dominés.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>list((float, float))</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="projet_madmc.non_domine_p_naif">
+<code class="sig-prename descclassname">projet_madmc.</code><code class="sig-name descname">non_domine_p_naif</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_vec</span></em><span class="sig-paren">)</span><a class="headerlink" href="#projet_madmc.non_domine_p_naif" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Détermine les vecteurs Pareto non-dominés dans une liste de vecteurs.
+Procède avec des comparaisons par paires systématiques de vecteurs et
+retourne une liste avec les vecteurs non dominés.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><p><strong>list_vec</strong> (<em>list</em><em>(</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em><em>)</em>) – Liste avec des tuples de floats de taille 2 représentant des vecteurs.</p>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p><strong>res</strong> – liste avec les vecteurs non dominés.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>list((float, float))</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="projet_madmc.pareto_dyn">
+<code class="sig-prename descclassname">projet_madmc.</code><code class="sig-name descname">pareto_dyn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tab_couts</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#projet_madmc.pareto_dyn" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Utilise la programmation dynamique pour calculer l’image des sous-ensembles
+Pareto-optimaux de taille k d’un ensemble de taille n d’objets bi-valués.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tab_couts</strong> (<em>list</em><em>(</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em><em>)</em>) – Liste avec des tuples de floats de taille 2 représentant des coûts des
+objets.</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – Quantité d’objets à prend dans la solution.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p><strong>_</strong> – Liste des images des solutions Pareto non-dominés.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>list((float, float))</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="projet_madmc.pareto_solver">
+<code class="sig-prename descclassname">projet_madmc.</code><code class="sig-name descname">pareto_solver</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_vec</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">I</span></em><span class="sig-paren">)</span><a class="headerlink" href="#projet_madmc.pareto_solver" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Implémente la procédure en deux temps pour déterminer l’image d’une
+solution minimax dans l’espace des objectifs.
+Fait comme décrit dans la partie 3 du projet en utilisant la dominance de
+Pareto.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>list_vec</strong> (<em>list</em><em>(</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em><em>)</em>) – Liste avec des tuples de floats de taille 2 représentant des coûts des
+objets.</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – Quantité d’objets à prend dans la solution.</p></li>
+<li><p><strong>I</strong> (<em>tuple</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – L’intervalle [alpha_min, alpha_max] utilisé dans le calcul.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p><strong>_</strong> – Vecteur avec l’image d’une solution minimax dans l’espace des
+objectifs.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>tuple(float, float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="projet_madmc.tester_temps_alpha">
+<code class="sig-prename descclassname">projet_madmc.</code><code class="sig-name descname">tester_temps_alpha</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fonction</span></em><span class="sig-paren">)</span><a class="headerlink" href="#projet_madmc.tester_temps_alpha" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Implémente le test de temps de calcul démandé à la Question 12.
+Teste une fonction de calcul d’un image d’une solution minimax dans
+l’espace des objectifs passée en paramètre en créant 500 ensembles de
+vecteurs tirés aléatoirements pour chaque valeur de épsilon entre 0.025 et
+0.5, avec un pas de 0.025, et en calculant le temps moyen de calcul pour
+chaque valeur d’épsilon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><p><strong>fonction</strong> (<em>Function</em>) – La fonction qu’on veut tester le temps d’exécution.</p>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p><strong>res</strong> – Dictionnaire dont les clés sont les épsilons utilisés pour créer
+les intervalles I et les valeurs le temps moyen de calcul pour chaque
+épsilon.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>dict(int : float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="projet_madmc.tester_temps_n">
+<code class="sig-prename descclassname">projet_madmc.</code><code class="sig-name descname">tester_temps_n</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fonction</span></em><span class="sig-paren">)</span><a class="headerlink" href="#projet_madmc.tester_temps_n" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Implémente le test de temps de calcul démandé à la Question 5.
+Teste une fonction de calcul des points Pareto non-dominés passée en
+paramètre en créant 50 ensembles de vecteurs tirés aléatoirements pour
+chaque valeur de n entre 200 et 1000, avec un pas de 200, et en calculant
+le temps moyen de calcul pour chaque valeur de n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><p><strong>fonction</strong> (<em>Function</em>) – La fonction qu’on veut tester le temps d’exécution.</p>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p><strong>res</strong> – Dictionnaire dont les clés sont les tailles utilisées dans la création
+des vecteurs et les valeurs le temps moyen de calcul pour chaque
+taille.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>dict(int : float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="projet_madmc.vec_minimax">
+<code class="sig-prename descclassname">projet_madmc.</code><code class="sig-name descname">vec_minimax</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_vec</span></em>, <em class="sig-param"><span class="n">I</span></em><span class="sig-paren">)</span><a class="headerlink" href="#projet_madmc.vec_minimax" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Calcule un vecteur minimax dans une liste de vecteurs.
+Utilise la fonction f_i pour calcular la valeur F_i de chaque vecteur.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>list_vec</strong> (<em>list</em><em>(</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em><em>)</em>) – Liste avec des tuples de floats de taille 2 représentant des vecteurs.</p></li>
+<li><p><strong>I</strong> (<em>tuple</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em>) – L’intervalle [alpha_min, alpha_max] utilisé dans le calcul.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie</dt>
+<dd class="field-even"><p><strong>vec_res</strong> – Un vecteur minimax de la liste des vecteurs.</p>
+</dd>
+<dt class="field-odd">Type renvoyé</dt>
+<dd class="field-odd"><p>tuple(float, float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Projet MADMC</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Ariana Carnielli.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
